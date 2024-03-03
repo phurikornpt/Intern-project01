@@ -25,7 +25,6 @@ import {
 import { useState } from 'react'
 
 export default function Home() {
-  const [test, setTest] = useState('')
   const [data, setData] = useState({
     fname: '',
     lname: '',
@@ -43,12 +42,12 @@ export default function Home() {
   })
   const [dataList, setDataList] = useState([{} as typeof data])
 
-  const handleSummit = (x: any) => {
-    x.preventDefault()
-    setDataList([...dataList, data])
+  const handleSummit = (summit: any) => {
+    summit.preventDefault()
+    setDataList((prev) => [...prev, data])
   }
-  const handleReset = (x: any) => {
-    setData({
+  const handleReset = () => {
+    const resetData: typeof data = {
       fname: '',
       lname: '',
       email: '',
@@ -62,12 +61,12 @@ export default function Home() {
       },
       status: '',
       note: '',
-    })
-    console.log(dataList)
+    }
+    setData((prev) => resetData)
   }
   const handleRemove = (userIndex: number) => {
     const list = dataList.filter((value, index) => index !== userIndex)
-    setDataList(list)
+    setDataList((prev) => list)
   }
   return (
     <Box
@@ -111,10 +110,10 @@ export default function Home() {
                         variant="outlined"
                         value={data.fname}
                         onChange={(even) => {
-                          setData({
-                            ...data,
+                          setData((prev) =>({
+                            ...prev,
                             fname: even.target.value,
-                          })
+                          }))
                         }}
                       />
                     </Grid>
@@ -126,10 +125,10 @@ export default function Home() {
                         variant="outlined"
                         value={data.lname}
                         onChange={(even) => {
-                          setData({
-                            ...data,
+                          setData((prev) =>({
+                            ...prev,
                             lname: even.target.value,
-                          })
+                          }))
                         }}
                       />
                     </Grid>
@@ -141,10 +140,10 @@ export default function Home() {
                         variant="outlined"
                         value={data.email}
                         onChange={(even) => {
-                          setData({
-                            ...data,
+                          setData((prev) =>({
+                            ...prev,
                             email: even.target.value,
-                          })
+                          }))
                         }}
                       />
                     </Grid>
@@ -155,10 +154,10 @@ export default function Home() {
                             <Checkbox
                               checked={data.pdpa}
                               onChange={(even) => {
-                                setData({
-                                  ...data,
+                                setData((prev) =>({
+                                  ...prev,
                                   pdpa: even.target.checked,
-                                })
+                                }))
                               }}
                             />
                           }
@@ -176,10 +175,10 @@ export default function Home() {
                           aria-labelledby="demo-row-radio-buttons-group-label"
                           name="row-radio-buttons-group"
                           onChange={(even) => {
-                            setData({
-                              ...data,
+                            setData((prev) =>({
+                              ...prev,
                               gender: even.target.value,
-                            })
+                            }))
                           }}
                           value={data.gender}
                         >
@@ -211,13 +210,13 @@ export default function Home() {
                               <Checkbox
                                 checked={data.hobby.Game}
                                 onChange={(even) => {
-                                  setData({
-                                    ...data,
+                                  setData((prev) =>({
+                                    ...prev,
                                     hobby: {
-                                      ...data.hobby,
+                                      ...prev.hobby,
                                       Game: even.target.checked,
                                     },
-                                  })
+                                  }))
                                 }}
                               />
                             }
@@ -228,13 +227,13 @@ export default function Home() {
                               <Checkbox
                                 checked={data.hobby.Music}
                                 onChange={(even) => {
-                                  setData({
-                                    ...data,
+                                  setData((prev) =>({
+                                    ...prev,
                                     hobby: {
-                                      ...data.hobby,
+                                      ...prev.hobby,
                                       Music: even.target.checked,
                                     },
-                                  })
+                                  }))
                                 }}
                               />
                             }
@@ -245,13 +244,13 @@ export default function Home() {
                               <Checkbox
                                 checked={data.hobby.Craft}
                                 onChange={(even) => {
-                                  setData({
-                                    ...data,
+                                  setData((prev) =>({
+                                    ...prev,
                                     hobby: {
-                                      ...data.hobby,
+                                      ...prev.hobby,
                                       Craft: even.target.checked,
                                     },
-                                  })
+                                  }))
                                 }}
                               />
                             }
@@ -262,13 +261,13 @@ export default function Home() {
                               <Checkbox
                                 checked={data.hobby.Reading}
                                 onChange={(even) => {
-                                  setData({
-                                    ...data,
+                                  setData((prev) =>({
+                                    ...prev,
                                     hobby: {
-                                      ...data.hobby,
+                                      ...prev.hobby,
                                       Reading: even.target.checked,
                                     },
-                                  })
+                                  }))
                                 }}
                               />
                             }
@@ -289,10 +288,10 @@ export default function Home() {
                           label="Age"
                           value={data.status}
                           onChange={(even: any) => {
-                            setData({
-                              ...data,
+                            setData((prev) =>({
+                              ...prev,
                               status: even.target.value,
-                            })
+                            }))
                           }}
                         >
                           <MenuItem value="Single">Single</MenuItem>
@@ -309,10 +308,10 @@ export default function Home() {
                         variant="outlined"
                         value={data.note}
                         onChange={(even) => {
-                          setData({
-                            ...data,
+                          setData((prev) =>({
+                            ...prev,
                             note: even.target.value,
-                          })
+                          }))
                         }}
                       />
                     </Grid>
